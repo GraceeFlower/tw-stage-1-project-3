@@ -25,7 +25,7 @@ window.onload = function () {
 
   function startGame() {
     resetScoreAndTime();
-    var intervalID = window.setInterval(chooseMole, 1000);
+    var intervalID = window.setInterval(chooseMole, 800);
     
     setTimeout(() => {
       startBtn.style.display = 'inline-block';
@@ -34,7 +34,7 @@ window.onload = function () {
     }, gameTime);
     setTimeout(() => {
       clearInterval(intervalID);
-    }, gameTime - 600);
+    }, gameTime - 500);
   }
 
   function resetScoreAndTime() {
@@ -45,7 +45,7 @@ window.onload = function () {
   }
 
   function chooseMole() {
-    const time = randomTime(600, 400);
+    const time = randomTime(500, 300);
     const hole = randomHole();
     peep(time, hole);
   }
