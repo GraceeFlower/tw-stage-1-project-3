@@ -13,7 +13,7 @@ window.onload = function () {
 
   startBtn.addEventListener('click', function () {
     showBtnAnimation();
-    setTimeout(() => {startGame()}, 1000);
+    startGame();
   }, false);
 
   function showBtnAnimation() {
@@ -28,10 +28,24 @@ window.onload = function () {
 
   function startGame() {
   // TODO: 写开始新游戏后发生的事
-    chooseMole();
+    resetScoreAndTime();
+    var intervalID = window.setInterval(chooseMole, 1000);
+    
     setTimeout(() => {
-      timeUp = true;
+      startBtn.style.display = 'inline-block';
+      startBtn.innerText = "Replay!";
+      titleH1.innerHTML = "TimeUp! ";
     }, gameTime);
+    setTimeout(() => {
+      clearInterval(intervalID);
+    }, gameTime - 600);
+  }
+
+  function resetScoreAndTime() {
+    score = 0;
+    scoreBoard.innerText = 0;
+    startBtn.innerText = "Start!";
+    titleH1.innerText = "WHACK-A-MOLE! ";
   }
 
   function chooseMole() {
@@ -45,9 +59,6 @@ window.onload = function () {
     hole.classList.add("up");
     setTimeout(() => {
         hole.classList.remove("up");
-        if(!timeUp) {
-          startGame();
-        }
     }, holeOutTime);
   }
 
@@ -64,7 +75,7 @@ window.onload = function () {
     var target = event.target;
     var hole = target.parentNode;
     if (hole.classList.contains("up")) {
-        scoreBoard.innerText = parseInt(scoreBoard.innerText) + 1;
+        scoreBoard.innerText = ++score;
         hole.classList.remove("up");
     }
   }))
