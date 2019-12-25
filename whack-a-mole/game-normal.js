@@ -1,6 +1,4 @@
 window.onload = function () {
-
-  const holes = document.querySelectorAll('.hole');
   const scoreBoard = document.querySelector('.score');
   const moles = document.querySelectorAll('.mole');
   const startBtn = document.getElementById('start_btn');
@@ -19,7 +17,6 @@ window.onload = function () {
   function showBtnAnimation() {
     event.preventDefault();
     startBtn.classList.add('animate');
-    // 按钮动画延时，按钮动画结束后发生的事：换为正常状态（class中的animate去掉），开始按钮消失
     setTimeout(() => {
       startBtn.classList.remove('animate');
       startBtn.style.display = 'none';
@@ -27,7 +24,6 @@ window.onload = function () {
   }
 
   function startGame() {
-  // TODO: 写开始新游戏后发生的事
     resetScoreAndTime();
     var intervalID = window.setInterval(chooseMole, 1000);
     
@@ -54,8 +50,9 @@ window.onload = function () {
     peep(time, hole);
   }
 
-  function peep(holeOutTime, holeIndex) {
-    var hole = document.querySelector(`.${holeIndex}`);
+  function peep(holeOutTime, hole) {
+    lastHole = hole;
+    var hole = document.querySelector(`.${hole}`);
     hole.classList.add("up");
     setTimeout(() => {
         hole.classList.remove("up");
@@ -68,6 +65,9 @@ window.onload = function () {
 
   function randomHole() {
     var holeIndex = "hole" + Math.ceil(Math.random() * 6);
+    if (holeIndex === lastHole) {
+      return randomHole();
+    }
     return holeIndex;
   }
 
