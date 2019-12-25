@@ -11,7 +11,6 @@ window.onload = function () {
   let score = 0;
   let gameTime = 10000;
 
-
   startBtn.addEventListener('click', function () {
     showBtnAnimation();
     setTimeout(() => {startGame()}, 1000);
@@ -19,7 +18,6 @@ window.onload = function () {
 
   function showBtnAnimation() {
     event.preventDefault();
-
     startBtn.classList.add('animate');
     // 按钮动画延时，按钮动画结束后发生的事：换为正常状态（class中的animate去掉），开始按钮消失
     setTimeout(() => {
@@ -30,7 +28,14 @@ window.onload = function () {
 
   function startGame() {
   // TODO: 写开始新游戏后发生的事
-    const time = randomTime(500, 1000);
+    chooseMole();
+    setTimeout(() => {
+      timeUp = true;
+    }, gameTime);
+  }
+
+  function chooseMole() {
+    const time = randomTime(600, 400);
     const hole = randomHole();
     peep(time, hole);
   }
@@ -40,6 +45,9 @@ window.onload = function () {
     hole.classList.add("up");
     setTimeout(() => {
         hole.classList.remove("up");
+        if(!timeUp) {
+          startGame();
+        }
     }, holeOutTime);
   }
 
@@ -51,4 +59,13 @@ window.onload = function () {
     var holeIndex = "hole" + Math.ceil(Math.random() * 6);
     return holeIndex;
   }
+
+  moles.forEach((mole) => mole.addEventListener("click", function (event) {
+    var target = event.target;
+    var hole = target.parentNode;
+    if (hole.classList.contains("up")) {
+        scoreBoard.innerText = parseInt(scoreBoard.innerText) + 1;
+        hole.classList.remove("up");
+    }
+  }))
 };
