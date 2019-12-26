@@ -25,3 +25,5 @@
 ### 要求
 - 注意命名规范，注意代码格式
 - Git小步提交，每个commit信息都要说明完成的哪个步骤
+
+点击[这个](https://graceeflower.github.io/tw-stage-1-project-3/whack-a-mole/)就可以开始游戏咯～
