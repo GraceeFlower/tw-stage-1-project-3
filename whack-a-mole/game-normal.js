@@ -33,8 +33,8 @@ window.onload = function () {
     
     setTimeout(() => {
       startBtn.style.display = 'inline-block';
-      startBtn.innerText = "Replay!";
-      titleH1.innerHTML = "TimeUp! ";
+      startBtn.innerText = 'Replay!';
+      titleH1.innerHTML = 'TimeUp! ';
       timeUp = true;
     }, gameTime);
     setTimeout(() => {
@@ -45,8 +45,8 @@ window.onload = function () {
   function resetScoreAndTime() {
     score = 0;
     scoreBoard.innerText = 0;
-    startBtn.innerText = "Start!";
-    titleH1.innerText = "WHACK-A-MOLE! ";
+    startBtn.innerText = 'Start!';
+    titleH1.innerText = 'WHACK-A-MOLE! ';
   }
 
   function chooseMole() {
@@ -58,9 +58,9 @@ window.onload = function () {
   function peep(holeOutTime, hole) {
     lastHole = hole;
     var hole = document.querySelector(`.${hole}`);
-    hole.classList.add("up");
+    hole.classList.add('up');
     setTimeout(() => {
-        hole.classList.remove("up");
+        hole.classList.remove('up');
     }, holeOutTime);
   }
 
@@ -69,19 +69,19 @@ window.onload = function () {
   }
 
   function randomHole() {
-    var holeIndex = "hole" + Math.ceil(Math.random() * 6);
+    var holeIndex = 'hole' + Math.ceil(Math.random() * 6);
     if (holeIndex === lastHole) {
       return randomHole();
     }
     return holeIndex;
   }
 
-  moles.forEach((mole) => mole.addEventListener("click", function (event) {
+  moles.forEach((mole) => mole.addEventListener('click', function (event) {
     var target = event.target;
     var hole = target.parentNode;
-    if (hole.classList.contains("up")) {
+    if (hole.classList.contains('up')) {
         scoreBoard.innerText = ++score;
-        hole.classList.remove("up");
+        hole.classList.remove('up');
     }
   }))
 };
