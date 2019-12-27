@@ -55,9 +55,9 @@ window.onload = function () {
     peep(time, hole);
   }
 
-  function peep(holeOutTime, hole) {
-    lastHole = hole;
-    var hole = document.querySelector(`.${hole}`);
+  function peep(holeOutTime, holeIndex) {
+    lastHole = holeIndex;
+    var hole = document.querySelector(`.${holeIndex}`);
     hole.classList.add('up');
     setTimeout(() => {
         hole.classList.remove('up');
