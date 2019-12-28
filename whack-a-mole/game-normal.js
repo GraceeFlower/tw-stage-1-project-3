@@ -9,8 +9,10 @@ window.onload = function () {
   let score = 0;
   let gameTime = 10000;
 
+  
   startBtn.addEventListener('click', function () {
     if (!timeUp) {
+      startBtn.setAttribute("disabled", true);
       showBtnAnimation();
       startGame();
     } else {
@@ -30,11 +32,11 @@ window.onload = function () {
 
   function startGame() {
     var intervalID = window.setInterval(chooseMole, 800);
-    
     setTimeout(() => {
       startBtn.style.display = 'inline-block';
       startBtn.innerText = 'Replay!';
       titleH1.innerHTML = 'TimeUp! ';
+      startBtn.disabled = false;
       timeUp = true;
     }, gameTime);
     setTimeout(() => {
